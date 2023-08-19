@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const COHORT_NAME = "2306-GHP-ET-WEB-FT-SF";
 const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
@@ -8,6 +8,7 @@ export default function Signup({ token, setToken }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -20,6 +21,7 @@ export default function Signup({ token, setToken }) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({
           user: {
@@ -31,9 +33,10 @@ export default function Signup({ token, setToken }) {
 
       const result = await response.json();
       console.log(result);
-      setToken(result.data.token);
+      setToken(result.token);
       console.log(token);
     } catch (error) {
+      setError("Failed to register")
       console.error(error);
     }
   }

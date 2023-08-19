@@ -10,7 +10,7 @@ export default function Authenticate({ token, setToken }) {
 
     async function handleClick() {
         try {
-            const response = await fetch(`${BASE_URL}/users`, {
+            const response = await fetch(`${BASE_URL}/users/register`, {
                 method: "POSt",
                 headers: {
                     'Content-Type': 'application/json',
