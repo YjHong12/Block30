@@ -13,20 +13,19 @@ export default function Signup({ setToken }) {
     event.preventDefault();
     console.log({ username, password });
     setUsername("");
-    setUsername("");
+    setPassword("");
 
     try {
       const response = await fetch(`${BASE_URL}/users/register`, {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json" },
         body: JSON.stringify({
             user: {
                 username: 'superman27',
                 password: 'krypt0n0rbust'
               }
         }),
-        headers: {
-          "Content-Type": "application/json",
-        },
       });
 
       const result = await response.json();
