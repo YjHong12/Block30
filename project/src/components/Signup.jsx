@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const COHORT_NAME = "2306-GHP-ET-WEB-FT-SF";
 const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
 
-export default function Signup({ setToken }) {
+export default function Signup({ token, setToken }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -19,20 +19,22 @@ export default function Signup({ setToken }) {
       const response = await fetch(`${BASE_URL}/users/register`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json" },
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
-            user: {
-                username: 'superman27',
-                password: 'krypt0n0rbust'
-              }
+          user: {
+            username: "superman27",
+            password: "krypt0n0rbust",
+          },
         }),
       });
 
       const result = await response.json();
       console.log(result);
-      setToken(result.token);
+      setToken(result.data.token);
+      console.log(token);
     } catch (error) {
-      setError(error.message);
+      console.error(error);
     }
   }
 
@@ -43,31 +45,28 @@ export default function Signup({ setToken }) {
       <form className="signupForm" onSubmit={handleSubmit}>
         <label>
           <b>Username: </b>
-          {""}
+          <input
+            type="text"
+            name="username"
+            id="username"
+            required
+            value={username}
+            onChange={(event) => setUsername(event.target.value)}
+          />
         </label>
-        <input
-          type="text"
-          name="username"
-          id="username"
-          required
-          value={username}
-          onChange={(event) => setUsername(event.target.value)}
-        />
         <br />
 
         <label>
-          {" "}
           <b>Password: </b>
-          {""}{" "}
+          <input
+            type="password"
+            name="password"
+            id="password"
+            required
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+          />
         </label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          required
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-        />
         <br />
         <br />
 
