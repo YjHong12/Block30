@@ -6,7 +6,6 @@ const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
 
 export default function Newpost() {
   const [post, setPost] = useState("");
-  const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
 
@@ -51,10 +50,10 @@ export default function Newpost() {
             <label>Title</label>
             <input
               type="text"
-              name="title"
+              name="post"
               required
-              value={title}
-              onChange={(event) => setTitle(event.target.value)}
+              value={post}
+              onChange={(event) => setPost(event.target.value)}
             />
             <br />
             <label>Description</label>
