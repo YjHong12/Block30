@@ -11,6 +11,7 @@ import Home from './components/Home';
 
 function App() {
   const [user, setUser] = useState(null);
+  const [posts, setPosts] = useState([]);
 
   return (
     <div>

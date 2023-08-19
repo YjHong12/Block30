@@ -15,14 +15,6 @@ export default function Signup({ setToken }) {
     setUsername("");
     setUsername("");
 
-    if (username.length === 0) {
-      setToken("");
-      setError("Username cannot be empty!");
-      setUsername("");
-      setPassword("");
-      return;
-    }
-
     try {
       const response = await fetch(`${BASE_URL}/users/register`, {
         method: "POST",
@@ -82,7 +74,7 @@ export default function Signup({ setToken }) {
 
         <button className="signup">REGISTER</button>
         <p>
-          Have an account? <Link to="/">Sign in</Link>
+          Have an account? <Link to="/login">Sign in</Link>
         </p>
       </form>
     </div>

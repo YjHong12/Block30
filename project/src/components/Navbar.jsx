@@ -3,10 +3,14 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
+    const signOut = () => {
+        alert("Signed out!");
+    }
     // const user = useSelector((state) => user.id);
 
   return (
-    <div className="navbar">
+    <nav className="navbar">
+        <h2>Stranger's Things</h2>
           <Link to="/">Home </Link>
           <Link to="/posts">Posts</Link>
           <Link to="/newpost">New Post</Link>
@@ -15,7 +19,11 @@ export default function Navbar() {
           </button> */}
           <Link to="/login">Login </Link>
           <Link to="/signup">Sign Up</Link>
-    </div>
+
+          <div className="navbarRight">
+            <button onClick={signOut}>Sign Out</button>
+          </div>
+    </nav>
   );
 }
 
