@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const COHORT_NAME = "2306-GHP-ET-WEB-FT-SF";
@@ -12,34 +12,35 @@ export default function Signup({ token, setToken }) {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    console.log({ username, password });
-    setUsername("");
-    setPassword("");
-
     try {
       const response = await fetch(`${BASE_URL}/users/register`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
-          'Authorization': `Bearer ${token}`
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({
           user: {
-            username: "superman27",
-            password: "krypt0n0rbust",
+            username,
+            password,
           },
         }),
       });
 
       const result = await response.json();
       console.log(result);
-      setToken(result.token);
+      setToken(result.data.token);
+      setUsername("");
+      setPassword("");
       console.log(token);
     } catch (error) {
       setError("Failed to register")
       console.error(error);
     }
   }
+
+useEffect(() => {
+  console.log("New Token:", token);
+}, [token]);
 
   return (
     <div className="signup">
@@ -73,7 +74,7 @@ export default function Signup({ token, setToken }) {
         <br />
         <br />
 
-        <button className="signup">REGISTER</button>
+        <button className="signup" type="submit">REGISTER</button>
         <p>
           Have an account? <Link to="/login">Sign in</Link>
         </p>

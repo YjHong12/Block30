@@ -1,58 +1,43 @@
 import React, { useState } from "react";
+import { newPost } from "../API";
 
 const COHORT_NAME = "2306-GHP-ET-WEB-FT-SF";
 const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
 
-export default function Newpost() {
-  const [post, setPost] = useState("");
+export default function Newpost({ token }) {
+  const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+  const [submitData, setSubmitData] = useState(null);
+  const [error, setError] = useState(null);
 
-  const handleSubmit = (event) => {
+  async function handleSubmit(event) {
     event.preventDefault();
-    console.log({ post });
-    setPost("");
-  };
 
-  const makePost = async () => {
     try {
-      const response = await fetch(`${BASE_URL}/posts`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${TOKEN_STRING_HERE}`,
-        },
-        body: JSON.stringify({
-          post: {
-            title: "My favorite stuffed animal",
-            description:
-              "This is a pooh doll from 1973. It has been carefully taken care of since I first got it.",
-            price: "$480.00",
-            willDeliver: true,
-          },
-        }),
-      });
-      const result = await response.json();
-      console.log(result);
-      return result;
+      const newData = await newPost(title, description, price, token);
+      setSubmitData(newData);
+      console.log({ title });
+      setTitle("");
     } catch (error) {
       console.error(error);
     }
-  };
+  }
 
   return (
     <>
       <div className="newpost">
         <h2 className="postTitle">Create a Post</h2>
         <form className="postForm" onSubmit={handleSubmit}>
+          {error && <p>{error}</p>}
           <div>
             <label>Title</label>
             <input
               type="text"
-              name="post"
+              name="title"
               required
-              value={post}
-              onChange={(event) => setPost(event.target.value)}
+              value={title}
+              onChange={(event) => setTitle(event.target.value)}
             />
             <br />
             <label>Description</label>

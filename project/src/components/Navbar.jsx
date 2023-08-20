@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function Navbar() {
+export default function Navbar({ isAuthenticated }) {
     const signOut = () => {
         alert("Signed out!");
     }
@@ -12,10 +12,7 @@ export default function Navbar() {
         <h2>Stranger's Things</h2>
           <Link to="/">Home </Link>
           <Link to="/posts">Posts</Link>
-          <Link to="/newpost">New Post</Link>
-          {/* <button className="logout" type="button" onClick={handleLogout}>
-            Logout
-          </button> */}
+          {isAuthenticated && <Link to="/newpost">New Post</Link>}
           <Link to="/login">Login </Link>
           <Link to="/signup">Sign Up</Link>
 
@@ -25,26 +22,3 @@ export default function Navbar() {
     </div>
   );
 }
-
-// return (
-//     <div className="navbar">
-//       {user ? (
-//         <div>
-//           <Link to="/">Home </Link>
-//           <Link to="/posts">Posts</Link>
-//           <Link to="/newpost">New Post</Link>
-//           {/* <button className="logout" type="button" onClick={handleLogout}>
-//             Logout
-//           </button> */}
-//         </div>
-//       ) : (
-//         <div>
-//           <Link to="/">Home </Link>
-//           <Link to="/posts">Posts</Link>
-//           <Link to="/login">Login </Link>
-//           <Link to="/signup">Sign Up</Link>
-//         </div>
-//       )}
-//     </div>
-//   );
-// }

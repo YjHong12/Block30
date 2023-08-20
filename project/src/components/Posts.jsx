@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import FetchPosts from "../API";
+import fetchPosts from "../API";
 
 export default function Posts() {
   const [posts, setPosts] = useState([]);
@@ -9,7 +9,7 @@ export default function Posts() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const postsData = await FetchPosts();
+        const postsData = await fetchPosts();
         setPosts(postsData.data.posts);
       } catch (error) {
         console.error("Error fetching posts", error);

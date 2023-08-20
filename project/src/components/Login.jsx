@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const COHORT_NAME = "2306-GHP-ET-WEB-FT-SF";
 const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
 
-export default function Login() {
+export default function Login({ token, setToken }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log({ username, password });
 
     try {
       const response = await fetch(`${BASE_URL}/users/login`, {
@@ -20,18 +20,20 @@ export default function Login() {
         },
         body: JSON.stringify({
           user: {
-            username,
-            password,
+            username: `${username}`,
+            password: `${password}`,
           },
         }),
       });
 
       const result = await response.json();
       console.log(result);
+      console.log("Token", result.data.token)
+      setToken(result.data.token);
     } catch (error) {
       console.error(error);
+      setError("Failed to log in")
     }
-
     setUsername("");
     setPassword("");
   };
@@ -39,6 +41,7 @@ export default function Login() {
   return (
     <div className="login">
       <h1>Log into your account</h1>
+      {error && <p>{error}</p>}
       <form className="loginForm" onSubmit={handleSubmit}>
         <label>Username</label>
         <input
