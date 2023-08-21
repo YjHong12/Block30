@@ -7,7 +7,7 @@ import { deletePost } from "../API";
 const COHORT_NAME = "2306-GHP-ET-WEB-FT-SF";
 const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
 
-export default function Posts() {
+export default function Posts({ token }) {
   const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
 
@@ -17,25 +17,24 @@ export default function Posts() {
         const postsData = await fetchPosts();
         setPosts(postsData.data.posts);
       } catch (error) {
-        console.error(error);
+        console.error("Error fetching posts", error);
       }
     }
     fetchData();
   }, []);
-
   const handleDelete = async (id) => {
     try {
-      await deletePost(id);
-      const posts = await fetchPosts();
-      setPosts(posts.data.posts);
-      console.log("DELETED")
+      await deletePost(id, token);
+      const postsData = await fetchPosts();
+      setPosts(postsData.data.posts);
+      // console.log("DELETED");
     } catch (error) {
       console.error(error);
     }
   };
 
-  const isAuthenticated = localStorage.getItem("token");
-  console.log(isAuthenticated)
+  // const isAuthenticated = localStorage.getItem("token");
+  // console.log(isAuthenticated)
 
   return (
     <div className="posts">
@@ -45,7 +44,11 @@ export default function Posts() {
           <p>{post.description}</p>
           <p>{post.price}</p>
 
-          <button onClick={() => handleDelete(post._id)}>Delete</button>
+
+
+            <button onClick={() => handleDelete(post._id)}>Delete</button>
+
+
         </li>
       ))}
     </div>
