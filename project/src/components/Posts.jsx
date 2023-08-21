@@ -3,12 +3,14 @@ import { useNavigate, useParams } from "react-router-dom";
 import Deletepost from "./Deletepost";
 import fetchPosts from "../API";
 import { deletePost } from "../API";
+import Search from "./Search";
 
 const COHORT_NAME = "2306-GHP-ET-WEB-FT-SF";
 const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
 
 export default function Posts({ token }) {
   const [posts, setPosts] = useState([]);
+  const [searchParam, setSearchParam] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,6 +24,13 @@ export default function Posts({ token }) {
     }
     fetchData();
   }, []);
+
+  const filteredPosts = searchParam
+  ? posts.filter((post) =>
+      post.title.toLowerCase().includes(searchParam)
+    )
+  : posts;
+
   const handleDelete = async (id) => {
     try {
       await deletePost(id, token);
@@ -38,17 +47,25 @@ export default function Posts({ token }) {
 
   return (
     <div className="posts">
-      {posts.map((post) => (
+      <div>
+        <label>
+          Search:{" "}
+          <input
+            type="text"
+            placeholder="search"
+            value={searchParam}
+            onChange={(e) => setSearchParam(e.target.value.toLowerCase())}
+          />
+        </label>
+      </div>
+
+      {filteredPosts.map((post) => (
         <li key={post._id}>
           <h4>{post.title}</h4>
           <p>{post.description}</p>
           <p>{post.price}</p>
 
-
-
-            <button onClick={() => handleDelete(post._id)}>Delete</button>
-
-
+          <button onClick={() => handleDelete(post._id)}>Delete</button>
         </li>
       ))}
     </div>

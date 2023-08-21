@@ -17,7 +17,6 @@ function App() {
       <div id="navbar">
           <Navbar isAuthenticated={isAuthenticated }/>
         </div>
-
       <Routes>
         <Route path='/register' element={<Signup token={token} setToken={setToken} />} />
         <Route path='/login' element={<Login token={token} setToken={setToken} />} />
