@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import Deletepost from "./Deletepost";
 import fetchPosts from "../API";
 import { deletePost } from "../API";
-import Search from "./Search";
 
 const COHORT_NAME = "2306-GHP-ET-WEB-FT-SF";
 const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;

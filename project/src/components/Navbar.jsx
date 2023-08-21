@@ -27,7 +27,7 @@ export default function Navbar({ isAuthenticated }) {
 
   return (
     <div className="navbar">
-      <h2>Stranger's Things</h2>
+      {/* <h2>Stranger's Things</h2> */}
       <Link to="/">Home </Link>
       <Link to="/posts">Posts</Link>
       {isAuthenticated && <Link to="/newpost">New Post</Link>}
