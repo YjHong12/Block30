@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import fetchPosts from "../API";
 import Deletepost from "./Deletepost";
 import { deletePost } from "../API";
@@ -29,34 +29,12 @@ export default function Posts() {
       const posts = await fetchPosts();
       setPosts(posts.data.posts);
       console.log("DELETED");
-
-      //   const token = localStorage.getItem("token");
-      //   const response = await fetch(`${BASE_URL}/posts/${postId}`, {
-      //     method: "GET",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //       Authorization: `Bearer ${token}`,
-      //     },
-      //   });
-      //   const postData = await response.json();
-
-      //   if (postData.data.author._id === localStorage.getItem("_id")) {
-      //     await deletePost(postId);
-      //     const newPostData = await fetchPosts();
-      //     setPosts(newPostData.data.posts);
-      //     console.log("DELETED");
-      //   } else {
-      //     console.log("Failed to delete post");
-      //   }
     } catch (error) {
       console.error(error);
     }
   };
 
   const isAuthenticated = localStorage.getItem("token");
-  // const userId = localStorage.getItem("_id");
-  // console.log(userId)
-  // console.log(isAuthenticated)
 
   return (
     <div className="posts">
@@ -66,14 +44,8 @@ export default function Posts() {
           <p>{post.description}</p>
           <p>{post.price}</p>
 
-          {post.isAuthenticated &&
-            isAuthor(
               <button onClick={() => handleDelete(post._id)}>Delete</button>
-            )}
 
-          {/* {post.author._id === userId && isAuthenticated && (
-              <button onClick={() => handleDelete(post._id)}>Delete</button>
-            )} */}
         </li>
       ))}
     </div>

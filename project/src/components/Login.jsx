@@ -30,10 +30,6 @@ export default function Login({ token, setToken }) {
 
       const result = await response.json();
       console.log(result);
-
-      // if (result.success) {
-      //   localStorage.setItem("token", result.data.token);
-      //   localStorage.setItem("_id", result.data.message._id);
         
         setToken(result.data.token);
         setSuccess(true);
@@ -42,9 +38,6 @@ export default function Login({ token, setToken }) {
         alert("Successfully logged in!")
         navigate("/posts");
 
-      // } else {
-      //   setError("Invalid Username/Password");
-      // }
     } catch (error) {
       console.error(error);
       setError("Failed to log in");
