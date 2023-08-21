@@ -35,6 +35,7 @@ export default function Login({ token, setToken }) {
         setSuccess(true);
         setUsername("");
         setPassword("");
+        console.log(result.data.token)
         alert("Successfully logged in!")
         navigate("/posts");
 

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import Deletepost from "./Deletepost";
 import fetchPosts from "../API";
 import { deletePost } from "../API";
 
@@ -27,12 +28,14 @@ export default function Posts() {
       await deletePost(id);
       const posts = await fetchPosts();
       setPosts(posts.data.posts);
+      console.log("DELETED")
     } catch (error) {
       console.error(error);
     }
   };
 
   const isAuthenticated = localStorage.getItem("token");
+  console.log(isAuthenticated)
 
   return (
     <div className="posts">
