@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { newPost } from "../API";
+import { useNavigate } from "react-router-dom";
 
 const COHORT_NAME = "2306-GHP-ET-WEB-FT-SF";
 const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
@@ -10,6 +11,7 @@ export default function Newpost({ token }) {
   const [price, setPrice] = useState("");
   const [submitData, setSubmitData] = useState(null);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -19,8 +21,10 @@ export default function Newpost({ token }) {
       setSubmitData(newData);
       console.log({ title });
       setTitle("");
+      navigate("/posts")
     } catch (error) {
       console.error(error);
+      setError("Failed to create a new post")
     }
   }
 

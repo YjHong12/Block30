@@ -5,7 +5,14 @@ const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
 
 export default async function fetchPosts() {
   try {
-    const response = await fetch(`${BASE_URL}/posts`);
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${BASE_URL}/posts`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const result = await response.json();
     return result;
   } catch (error) {
@@ -25,9 +32,9 @@ export async function newPost(title, description, price, token) {
         post: {
           title: title,
           description: description,
-          price: price
-        }
-      })
+          price: price,
+        },
+      }),
     });
     const result = await response.json();
     console.log(result);
@@ -37,9 +44,10 @@ export async function newPost(title, description, price, token) {
   }
 }
 
-export async function deletePost(id, token) {
+export async function deletePost(postId) {
   try {
-    const response = await fetch(`${BASE_URL}/posts/${id}`, {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${BASE_URL}/posts/${postId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -48,27 +56,20 @@ export async function deletePost(id, token) {
     });
     const result = await response.json();
     console.log(result);
+    return result;
   } catch (error) {
     console.error(error);
   }
 }
 
-// export async function signUpURL() {
-//   try {
-//     const response = await fetch(`${BASE_URL}/signup`);
-//     const result = await response.json();
-//     return result;
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
-
-// export async function loginURL(username, password) {
-//   try {
-//     const response = await fetch(`${BASE_URL}/login`);
-//     const result = await response.json();
-//     return result;
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
+export async function authTest() {
+  const token = localStorage.getItem("token");
+  const response = await fetch(`${BASE_URL}/test/me`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const result = await response.json();
+  return result.success;
+}

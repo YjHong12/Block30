@@ -14,7 +14,7 @@ export default function Navbar({ isAuthenticated }) {
           <Link to="/posts">Posts</Link>
           {isAuthenticated && <Link to="/newpost">New Post</Link>}
           <Link to="/login">Login </Link>
-          <Link to="/signup">Sign Up</Link>
+          <Link to="/register">Sign Up</Link>
 
           <div className="navbarRight">
             <button onClick={signOut}>Sign Out</button>

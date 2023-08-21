@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const COHORT_NAME = "2306-GHP-ET-WEB-FT-SF";
 const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
@@ -8,6 +8,8 @@ export default function Login({ token, setToken }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -20,22 +22,33 @@ export default function Login({ token, setToken }) {
         },
         body: JSON.stringify({
           user: {
-            username: `${username}`,
-            password: `${password}`,
+            username: username,
+            password: password,
           },
         }),
       });
 
       const result = await response.json();
       console.log(result);
-      console.log("Token", result.data.token)
-      setToken(result.data.token);
+
+      // if (result.success) {
+      //   localStorage.setItem("token", result.data.token);
+      //   localStorage.setItem("_id", result.data.message._id);
+        
+        setToken(result.data.token);
+        setSuccess(true);
+        setUsername("");
+        setPassword("");
+        alert("Successfully logged in!")
+        navigate("/posts");
+
+      // } else {
+      //   setError("Invalid Username/Password");
+      // }
     } catch (error) {
       console.error(error);
-      setError("Failed to log in")
+      setError("Failed to log in");
     }
-    setUsername("");
-    setPassword("");
   };
 
   return (
@@ -51,6 +64,7 @@ export default function Login({ token, setToken }) {
           value={username}
           onChange={(event) => setUsername(event.target.value)}
         />
+        <br />
         <label>Password</label>
         <input
           type="password"
@@ -59,6 +73,7 @@ export default function Login({ token, setToken }) {
           value={password}
           onChange={(event) => setPassword(event.target.value)}
         />
+        <br />
         <button className="loginButton" type="submit">
           SIGN IN
         </button>

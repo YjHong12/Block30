@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const COHORT_NAME = "2306-GHP-ET-WEB-FT-SF";
 const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
@@ -8,7 +8,7 @@ export default function Signup({ token, setToken }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
+  const [signedin, setSignedin] = useState(false);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -31,7 +31,9 @@ export default function Signup({ token, setToken }) {
       setToken(result.data.token);
       setUsername("");
       setPassword("");
+      setSignedin(true);
       console.log(token);
+      alert("Succesfully signed up!");
     } catch (error) {
       setError("Failed to register")
       console.error(error);
@@ -45,6 +47,7 @@ useEffect(() => {
   return (
     <div className="signup">
       <h1>Create an account</h1>
+      {signedin && <p>Succesfully signed up! You can now <Link to="/login">Log in</Link></p>}
       {error && <p>{error}</p>}
       <form className="signupForm" onSubmit={handleSubmit}>
         <label>
