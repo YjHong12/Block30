@@ -62,9 +62,9 @@ export async function deletePost(postId) {
   }
 }
 
-export async function authTest() {
+export async function authTest(fetchFunction) {
   const token = localStorage.getItem("token");
-  const response = await fetch(`${BASE_URL}/test/me`, {
+  const response = await fetchFunction(`${BASE_URL}/test/me`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,
