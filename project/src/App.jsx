@@ -17,7 +17,7 @@ function App() {
       <h2>Stranger's Things</h2>
       <BrowserRouter>
         <div id="navbar">
-          <Navbar isAuthenticated={isAuthenticated} />
+          <Navbar isAuthenticated={isAuthenticated} token={token} setToken={setToken}/>
         </div>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -29,9 +29,9 @@ function App() {
             path="/login"
             element={<Login token={token} setToken={setToken} />}
           />
-          <Route path="/posts" element={<Posts token={token} />} />
+          <Route path="/posts" element={<Posts token={token} setToken={setToken} />} />
           {isAuthenticated && (
-            <Route path="/newpost" element={<Newpost token={token} />} />
+            <Route path="/newpost" element={<Newpost token={token} setToken={setToken} />} />
           )}
         </Routes>
       </BrowserRouter>

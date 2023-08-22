@@ -1,12 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
-export default function Navbar({ isAuthenticated }) {
+export default function Navbar({ isAuthenticated, setToken }) {
   const navigate = useNavigate();
 
   const signOut = () => {
     alert("Signed out!");
+    setToken(null);
+    localStorage.removeItem("token");
     navigate("/login");
-    window.location.reload();
   };
 
   return (

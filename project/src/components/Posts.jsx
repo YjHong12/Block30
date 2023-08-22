@@ -34,6 +34,8 @@ export default function Posts({ token }) {
     }
   };
 
+  const isAuthenticated = localStorage.getItem("authToken");
+
   useEffect(() => {
     if (token) {
       localStorage.setItem("authToken", token);
