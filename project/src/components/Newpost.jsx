@@ -18,6 +18,7 @@ export default function Newpost({ token }) {
       setSubmitData(newData);
       console.log({ title });
       setTitle("");
+      alert("Created a new post!")
       navigate("/posts");
     } catch (error) {
       console.error(error);

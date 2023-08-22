@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import fetchPosts from "../API";
 import { deletePost } from "../API";
 
 export default function Posts({ token }) {
   const [posts, setPosts] = useState([]);
   const [searchParam, setSearchParam] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
@@ -29,6 +31,8 @@ export default function Posts({ token }) {
       await deletePost(id, token);
       const postsData = await fetchPosts(token);
       setPosts(postsData.data.posts);
+      alert("Deleted!")
+      navigate("/");
     } catch (error) {
       console.error(error);
     }
