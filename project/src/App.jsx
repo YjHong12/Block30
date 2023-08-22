@@ -35,6 +35,12 @@ function App() {
           )}
         </Routes>
       </BrowserRouter>
+
+      <section>
+        <footer className="scrollTop">
+            <a href="#top">⇧ Top</a>
+        </footer>
+      </section>
     </div>
   );
 }

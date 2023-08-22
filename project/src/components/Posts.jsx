@@ -46,14 +46,14 @@ export default function Posts({ token }) {
 
   return (
     <div className="posts">
-      <div>
+      <div className="search">
         <label>
           Search:{" "}
           <input
             type="text"
             placeholder="search"
             value={searchParam}
-            onChange={(e) => setSearchParam(e.target.value.toLowerCase())}
+            onChange={(event) => setSearchParam(event.target.value.toLowerCase())}
           />
         </label>
       </div>

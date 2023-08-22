@@ -50,7 +50,7 @@ export default function Login({ token, setToken }) {
       <h1>Log into your account</h1>
       {error && <p>{error}</p>}
       <form className="loginForm" onSubmit={handleSubmit}>
-        <label>Username</label>
+        <label><b>Username: </b></label>
         <input
           type="text"
           name="username"
@@ -59,7 +59,7 @@ export default function Login({ token, setToken }) {
           onChange={(event) => setUsername(event.target.value)}
         />
         <br />
-        <label>Password</label>
+        <label><b>Password: </b></label>
         <input
           type="password"
           name="password"
@@ -68,11 +68,12 @@ export default function Login({ token, setToken }) {
           onChange={(event) => setPassword(event.target.value)}
         />
         <br />
+        <br />
         <button className="loginButton" type="submit">
           SIGN IN
         </button>
         <p>
-          Don't have an account? <Link to="/signup">Sign Up</Link>
+          Don't have an account? <Link to="/register">Sign Up</Link>
         </p>
       </form>
     </div>
