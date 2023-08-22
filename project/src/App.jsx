@@ -29,7 +29,7 @@ function App() {
             path="/login"
             element={<Login token={token} setToken={setToken} />}
           />
-          <Route path="/posts" element={<Posts />} />
+          <Route path="/posts" element={<Posts token={token} />} />
           {isAuthenticated && (
             <Route path="/newpost" element={<Newpost token={token} />} />
           )}

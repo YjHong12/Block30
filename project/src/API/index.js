@@ -44,9 +44,9 @@ export async function newPost(title, description, price, token) {
   }
 }
 
-export async function deletePost(postId) {
+export async function deletePost(postId, token) {
+  // console.log("Token in deletePost:", token)
   try {
-    const token = localStorage.getItem("token");
     const response = await fetch(`${BASE_URL}/posts/${postId}`, {
       method: "DELETE",
       headers: {

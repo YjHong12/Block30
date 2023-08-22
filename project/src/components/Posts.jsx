@@ -8,6 +8,7 @@ const COHORT_NAME = "2306-GHP-ET-WEB-FT-SF";
 const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
 
 export default function Posts({ token }) {
+  // console.log("Token from prop:", token);
   const [posts, setPosts] = useState([]);
   const [searchParam, setSearchParam] = useState("");
   const navigate = useNavigate();
@@ -15,14 +16,14 @@ export default function Posts({ token }) {
   useEffect(() => {
     async function fetchData() {
       try {
-        const postsData = await fetchPosts();
+        const postsData = await fetchPosts(token);
         setPosts(postsData.data.posts);
       } catch (error) {
         console.error("Error fetching posts", error);
       }
     }
     fetchData();
-  }, []);
+  }, [token]);
 
   const filteredPosts = searchParam
   ? posts.filter((post) =>
@@ -33,7 +34,7 @@ export default function Posts({ token }) {
   const handleDelete = async (id) => {
     try {
       await deletePost(id, token);
-      const postsData = await fetchPosts();
+      const postsData = await fetchPosts(token);
       setPosts(postsData.data.posts);
       // console.log("DELETED");
     } catch (error) {
@@ -41,8 +42,14 @@ export default function Posts({ token }) {
     }
   };
 
-  // const isAuthenticated = localStorage.getItem("token");
-  // console.log(isAuthenticated)
+  const isAuthenticated = localStorage.getItem("authToken");
+  // console.log("Is it authenticated", isAuthenticated)
+
+  useEffect(() => {
+    if (token) {
+      localStorage.setItem("authToken", token);
+    }
+  }, [token]);
 
   return (
     <div className="posts">

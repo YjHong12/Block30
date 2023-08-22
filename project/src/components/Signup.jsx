@@ -51,7 +51,7 @@ useEffect(() => {
       {error && <p>{error}</p>}
       <form className="signupForm" onSubmit={handleSubmit}>
         <label>
-          <b>Username: </b>
+          <b>Username: </b> 
           <input
             type="text"
             name="username"

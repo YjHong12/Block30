@@ -22,6 +22,7 @@ export default function Newpost({ token }) {
       console.log({ title });
       setTitle("");
       navigate("/posts")
+
     } catch (error) {
       console.error(error);
       setError("Failed to create a new post")
@@ -39,7 +40,7 @@ export default function Newpost({ token }) {
             <input
               type="text"
               name="title"
-              required
+              required 
               value={title}
               onChange={(event) => setTitle(event.target.value)}
             />

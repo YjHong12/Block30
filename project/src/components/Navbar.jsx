@@ -10,6 +10,7 @@ export default function Navbar({ isAuthenticated }) {
   const signOut = () => {
     alert("Signed out!");
     navigate("/login");
+    window.location.reload();
   };
   // const dispatch = useDispatch();
   // const authService = useAuthApi();
