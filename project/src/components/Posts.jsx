@@ -1,17 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import Deletepost from "./Deletepost";
 import fetchPosts from "../API";
 import { deletePost } from "../API";
 
-const COHORT_NAME = "2306-GHP-ET-WEB-FT-SF";
-const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
-
 export default function Posts({ token }) {
-  // console.log("Token from prop:", token);
   const [posts, setPosts] = useState([]);
   const [searchParam, setSearchParam] = useState("");
-  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
@@ -36,14 +29,10 @@ export default function Posts({ token }) {
       await deletePost(id, token);
       const postsData = await fetchPosts(token);
       setPosts(postsData.data.posts);
-      // console.log("DELETED");
     } catch (error) {
       console.error(error);
     }
   };
-
-  const isAuthenticated = localStorage.getItem("authToken");
-  // console.log("Is it authenticated", isAuthenticated)
 
   useEffect(() => {
     if (token) {

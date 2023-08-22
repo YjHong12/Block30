@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import { newPost } from "../API";
 import { useNavigate } from "react-router-dom";
 
-const COHORT_NAME = "2306-GHP-ET-WEB-FT-SF";
-const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
-
 export default function Newpost({ token }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -21,11 +18,10 @@ export default function Newpost({ token }) {
       setSubmitData(newData);
       console.log({ title });
       setTitle("");
-      navigate("/posts")
-
+      navigate("/posts");
     } catch (error) {
       console.error(error);
-      setError("Failed to create a new post")
+      setError("Failed to create a new post");
     }
   }
 
@@ -36,16 +32,20 @@ export default function Newpost({ token }) {
         <form className="postForm" onSubmit={handleSubmit}>
           {error && <p>{error}</p>}
           <div>
-            <label><b>Title: </b></label>
+            <label>
+              <b>Title: </b>
+            </label>
             <input
               type="text"
               name="title"
-              required 
+              required
               value={title}
               onChange={(event) => setTitle(event.target.value)}
             />
             <br />
-            <label className="description"><b>Description: </b></label>
+            <label className="description">
+              <b>Description: </b>
+            </label>
             <input
               type="text"
               name="description"
@@ -54,7 +54,9 @@ export default function Newpost({ token }) {
               onChange={(event) => setDescription(event.target.value)}
             />
             <br />
-            <label><b>Price: </b></label>
+            <label>
+              <b>Price: </b>
+            </label>
             <input
               type="text"
               name="price"

@@ -1,5 +1,3 @@
-import React, { useEffect, useState } from "react";
-
 const COHORT_NAME = "2306-GHP-ET-WEB-FT-SF";
 const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
 
@@ -45,7 +43,6 @@ export async function newPost(title, description, price, token) {
 }
 
 export async function deletePost(postId, token) {
-  // console.log("Token in deletePost:", token)
   try {
     const response = await fetch(`${BASE_URL}/posts/${postId}`, {
       method: "DELETE",

@@ -1,8 +1,4 @@
-import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-// import { logOut } from "../authentication/AuthSlice";
-// import { useAuthApi } from "../authentication/authAPI";
 
 export default function Navbar({ isAuthenticated }) {
   const navigate = useNavigate();
@@ -12,19 +8,6 @@ export default function Navbar({ isAuthenticated }) {
     navigate("/login");
     window.location.reload();
   };
-  // const dispatch = useDispatch();
-  // const authService = useAuthApi();
-
-  // const handleLogout = async () => {
-  //   try {
-  //     await authService.logout();
-  //     dispatch(logOut());
-  //     alert("Signed out!");
-  //     navigate("/login");
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
 
   return (
     <div className="navbar">

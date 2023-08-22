@@ -38,7 +38,7 @@ function App() {
 
       <section>
         <footer className="scrollTop">
-            <a href="#top">⇧ Top</a>
+          <a href="#top">⇧ Top</a>
         </footer>
       </section>
     </div>

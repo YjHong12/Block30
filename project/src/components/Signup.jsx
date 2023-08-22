@@ -16,7 +16,7 @@ export default function Signup({ token, setToken }) {
       const response = await fetch(`${BASE_URL}/users/register`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           user: {
@@ -35,23 +35,27 @@ export default function Signup({ token, setToken }) {
       console.log(token);
       alert("Succesfully signed up!");
     } catch (error) {
-      setError("Failed to register")
+      setError("Failed to register");
       console.error(error);
     }
   }
 
-useEffect(() => {
-  console.log("New Token:", token);
-}, [token]);
+  useEffect(() => {
+    console.log("New Token:", token);
+  }, [token]);
 
   return (
     <div className="signup">
       <h1>Create an account</h1>
-      {signedin && <p>Succesfully signed up! You can now <Link to="/login">Log in</Link></p>}
+      {signedin && (
+        <p>
+          Succesfully signed up! You can now <Link to="/login">Log in</Link>
+        </p>
+      )}
       {error && <p>{error}</p>}
       <form className="signupForm" onSubmit={handleSubmit}>
         <label>
-          <b>Username: </b> 
+          <b>Username: </b>
           <input
             type="text"
             name="username"
@@ -77,7 +81,9 @@ useEffect(() => {
         <br />
         <br />
 
-        <button className="signup" type="submit">REGISTER</button>
+        <button className="signup" type="submit">
+          REGISTER
+        </button>
         <p>
           Have an account? <Link to="/login">Sign in</Link>
         </p>

@@ -30,18 +30,16 @@ export default function Login({ token, setToken }) {
 
       const result = await response.json();
       console.log(result);
-        
-        setToken(result.data.token); 
-        localStorage.setItem("token", token);
-        // console.log("Token localStorage:", token);
 
-        setSuccess(true);
-        setUsername("");
-        setPassword("");
-        console.log(result.data.token)
-        alert("Successfully logged in!")
-        navigate("/posts");
+      setToken(result.data.token);
+      localStorage.setItem("token", token);
 
+      setSuccess(true);
+      setUsername("");
+      setPassword("");
+      console.log(result.data.token);
+      alert("Successfully logged in!");
+      navigate("/posts");
     } catch (error) {
       console.error(error);
       setError("Failed to log in");
@@ -53,7 +51,9 @@ export default function Login({ token, setToken }) {
       <h1>Log into your account</h1>
       {error && <p>{error}</p>}
       <form className="loginForm" onSubmit={handleSubmit}>
-        <label><b>Username: </b></label>
+        <label>
+          <b>Username: </b>
+        </label>
         <input
           type="text"
           name="username"
@@ -62,7 +62,9 @@ export default function Login({ token, setToken }) {
           onChange={(event) => setUsername(event.target.value)}
         />
         <br />
-        <label><b>Password: </b></label>
+        <label>
+          <b>Password: </b>
+        </label>
         <input
           type="password"
           name="password"
