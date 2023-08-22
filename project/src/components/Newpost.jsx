@@ -31,11 +31,11 @@ export default function Newpost({ token }) {
   return (
     <>
       <div className="newpost">
-        <h2 className="postTitle">Create a Post</h2>
+        <h1 className="postTitle">Create a Post</h1>
         <form className="postForm" onSubmit={handleSubmit}>
           {error && <p>{error}</p>}
           <div>
-            <label>Title</label>
+            <label><b>Title: </b></label>
             <input
               type="text"
               name="title"
@@ -44,7 +44,7 @@ export default function Newpost({ token }) {
               onChange={(event) => setTitle(event.target.value)}
             />
             <br />
-            <label>Description</label>
+            <label className="description"><b>Description: </b></label>
             <input
               type="text"
               name="description"
@@ -53,7 +53,7 @@ export default function Newpost({ token }) {
               onChange={(event) => setDescription(event.target.value)}
             />
             <br />
-            <label>Price</label>
+            <label><b>Price: </b></label>
             <input
               type="text"
               name="price"
@@ -61,6 +61,8 @@ export default function Newpost({ token }) {
               value={price}
               onChange={(event) => setPrice(event.target.value)}
             />
+            <br />
+            <br />
           </div>
           <button className="newPostButton">CREATE POST</button>
         </form>

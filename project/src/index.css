@@ -88,11 +88,21 @@ input {
   border: none;
 }
 
-div.login, div.signup {
+div.login, div.signup, div.newpost {
   text-align: center;
   /* background-color: #c5ccbb; */
 }
 
 .scrollTop {
   text-align: right;
+}
+
+input {
+  padding: .5em;
+  margin: .3em;
+  width: 25vw;
+}
+
+input[name=description] {
+  height: 10vh;
 }
